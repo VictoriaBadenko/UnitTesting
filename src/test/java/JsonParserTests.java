@@ -58,7 +58,6 @@ public class JsonParserTests {
         assertNotNull(readCart);
         assertEquals(cart.getCartName(), readCart.getCartName());
         assertEquals(cart.getTotalPrice(), readCart.getTotalPrice());
-
     }
 
     @Disabled
