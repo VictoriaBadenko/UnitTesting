@@ -6,13 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class VirtualItemTest {
 
     @Test
-    public void testSetAndGetDiskSize() {
+    public void testToString() {
         VirtualItem virtualItem = new VirtualItem();
-        double expectedSizeOnDisk = 500.0;
+        virtualItem.setName("Office");
+        virtualItem.setPrice(1000);
+        virtualItem.setSizeOnDisk(2.5);
 
-        virtualItem.setSizeOnDisk(expectedSizeOnDisk);
-
-        double actualSizeOnDisk = virtualItem.getSizeOnDisk();
-        assertEquals(expectedSizeOnDisk, actualSizeOnDisk);
+        String actual = virtualItem.toString();
+        String expected = "Class: class shop.VirtualItem; Name: Laptop; Price: 1000.0; Size on disk: 2.5";
+        assertEquals(expected, actual, "Actual and expected string result should be matched.");
     }
 }

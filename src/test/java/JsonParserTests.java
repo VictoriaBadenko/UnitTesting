@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import parser.JsonParser;
 import parser.NoSuchFileException;
 import shop.Cart;
@@ -7,19 +8,16 @@ import shop.RealItem;
 import shop.VirtualItem;
 
 import java.io.File;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@Nested
 @DisplayName("Tests for JsonParser class")
 public class JsonParserTests {
 
     private JsonParser jsonParser;
     private Cart cart;
     private final String FILE_PATH = "src/main/resources/TestCart.json";
-
-    @TempDir
-    public File tempDir;
 
     @BeforeEach
     public void setup() {
@@ -46,7 +44,19 @@ public class JsonParserTests {
     }
 
     @Test
-    public void testWriteAndReadFromFile() {
+    @Tag("Json Parser")
+    public void testWriteToFile() {
+        File file = new File(FILE_PATH);
+
+        // Write to file
+        jsonParser.writeToFile(cart);
+
+        assertTrue(file.exists(), "The file should be created");
+    }
+
+    @Test
+    @Tag("Json Parser")
+    public void testReadFromFile() {
         File file = new File(FILE_PATH);
 
         // Write to file
@@ -55,29 +65,29 @@ public class JsonParserTests {
         // Read from file
         Cart readCart = jsonParser.readFromFile(file);
 
-        assertNotNull(readCart);
-        assertEquals(cart.getCartName(), readCart.getCartName());
-        assertEquals(cart.getTotalPrice(), readCart.getTotalPrice());
+        assertAll(
+                () -> assertNotNull(readCart),
+                () -> assertEquals(cart.getCartName(), readCart.getCartName()),
+                () -> assertEquals(cart.getTotalPrice(), readCart.getTotalPrice())
+        );
     }
 
-    @Disabled
-    @Test
-    public void testReadFromNonExistentFile() {
-        // Define five different files to test NoSuchFileException
-        File file1 = new File(tempDir, "File1.json");
-        File file2 = new File(tempDir, "File2.json");
-        File file3 = new File(tempDir, "File3.json");
-        File file4 = new File(tempDir, "File4.json");
-        File file5 = new File(tempDir, "File5.json");
-
+    @Disabled("Test disabled due to non relevant data")
+    @ParameterizedTest
+    @Tag("Json Parser")
+    @MethodSource("nonExistentFilesProvider")
+    public void testReadFromNonExistentFile(File nonExistentFile) {
         // For each file, assert that reading from it throws NoSuchFileException
-        // Added grouped assertion
-        assertAll(
-                () -> assertThrows(NoSuchFileException.class, () -> jsonParser.readFromFile(file1)),
-                () -> assertThrows(NoSuchFileException.class, () -> jsonParser.readFromFile(file2)),
-                () -> assertThrows(NoSuchFileException.class, () -> jsonParser.readFromFile(file3)),
-                () -> assertThrows(NoSuchFileException.class, () -> jsonParser.readFromFile(file4)),
-                () -> assertThrows(NoSuchFileException.class, () -> jsonParser.readFromFile(file5))
+        assertThrows(NoSuchFileException.class, () -> jsonParser.readFromFile(nonExistentFile));
+    }
+
+    private static Stream<File> nonExistentFilesProvider() {
+        return Stream.of(
+                new File("File1.json"),
+                new File("File2.json"),
+                new File("File3.json"),
+                new File("File4.json"),
+                new File("File5.json")
         );
     }
 }

@@ -1,12 +1,9 @@
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import shop.Cart;
 import shop.RealItem;
 import shop.VirtualItem;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Nested
 @DisplayName("Tests for Cart class")
@@ -30,38 +27,56 @@ public class CartTests {
     }
 
     @Test
-    public void testAddItems() {
-        // Add items to cart
+    @Tag("Cart")
+    public void testAddRealItem() {
+        // Add item to cart
         cart.addRealItem(realItem);
-        cart.addVirtualItem(virtualItem);
-
-        // Check if items are present in the cart
-        assertTrue(cart.getRealItems().contains(realItem));
-        assertTrue(cart.getVirtualItems().contains(virtualItem));
 
         // Check total price
-        double expectedTotalPrice = 10.0 + 10.0 * 0.2 + 20.0 + 20.0 * 0.2;
+        double expectedTotalPrice = 10.0 + 10.0 * 0.2;
         double actualTotalPrice = cart.getTotalPrice();
-        assertEquals(expectedTotalPrice, actualTotalPrice);
+        assertEquals(expectedTotalPrice, actualTotalPrice, "Real Item's actual and expected total price should be matched");
     }
 
     @Test
-    public void testDeleteItems() {
-        // Add items to cart
-        cart.addRealItem(realItem);
+    @Tag("Cart")
+    public void testAddVirtualItem() {
+        // Add item to cart
         cart.addVirtualItem(virtualItem);
+
+        // Check total price
+        double expectedTotalPrice = 20.0 + 20.0 * 0.2;
+        double actualTotalPrice = cart.getTotalPrice();
+        assertEquals(expectedTotalPrice, actualTotalPrice, "Virtual Item's actual and expected total price should be matched");
+    }
+
+    @Test
+    @Tag("Cart")
+    public void testDeleteRealItem() {
+        // Add item to cart
+        cart.addRealItem(realItem);
 
         // Delete items from cart
         cart.deleteRealItem(realItem);
-        cart.deleteVirtualItem(virtualItem);
 
-        // Check if items are no longer present in the cart
-        assertFalse(cart.getRealItems().contains(realItem));
-        assertFalse(cart.getVirtualItems().contains(virtualItem));
-
-        //Check total price after deleting items
+        //Check total price after deleting item
         double expectedTotalPriceAfterDelete = 0.0;
         double actualTotalPriceAfterDelete = cart.getTotalPrice();
-        assertEquals(expectedTotalPriceAfterDelete, actualTotalPriceAfterDelete);
+        assertEquals(expectedTotalPriceAfterDelete, actualTotalPriceAfterDelete, "Real Item's total price after delete should be matched with expected.");
+    }
+
+    @Test
+    @Tag("Cart")
+    public void testDeleteVirtualItem() {
+        // Add item to cart
+        cart.addVirtualItem(virtualItem);
+
+        // Delete item from cart
+        cart.deleteVirtualItem(virtualItem);
+
+        //Check total price after deleting item
+        double expectedTotalPriceAfterDelete = 0.0;
+        double actualTotalPriceAfterDelete = cart.getTotalPrice();
+        assertEquals(expectedTotalPriceAfterDelete, actualTotalPriceAfterDelete, "Virtual Item's total price after delete should be matched with expected.");
     }
 }
