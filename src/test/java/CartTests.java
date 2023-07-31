@@ -5,7 +5,6 @@ import shop.VirtualItem;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Nested
 @DisplayName("Tests for Cart class")
 public class CartTests {
     private Cart cart;
