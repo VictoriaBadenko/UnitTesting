@@ -46,7 +46,7 @@ public class JsonParserTests {
     }
 
     @Test
-    public void verifyWriteAndReadFromFile() {
+    public void testWriteAndReadFromFile() {
         File file = new File(FILE_PATH);
 
         // Write to file
@@ -62,7 +62,7 @@ public class JsonParserTests {
 
     @Disabled
     @Test
-    public void verifyReadFromNonExistentFile() {
+    public void testReadFromNonExistentFile() {
         // Define five different files to test NoSuchFileException
         File file1 = new File(tempDir, "File1.json");
         File file2 = new File(tempDir, "File2.json");

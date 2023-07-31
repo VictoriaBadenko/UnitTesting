@@ -6,7 +6,7 @@ import static org.testng.AssertJUnit.assertEquals;
 public class RealItemTest {
 
     @Test
-    public void verifySetAndGetWeight() {
+    public void testSetAndGetWeight() {
         RealItem realItem = new RealItem();
         double expectedWeight = 5.0;
 

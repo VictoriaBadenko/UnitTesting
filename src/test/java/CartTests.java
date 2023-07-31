@@ -30,7 +30,7 @@ public class CartTests {
     }
 
     @Test
-    public void verifyAddItems() {
+    public void testAddItems() {
         // Add items to cart
         cart.addRealItem(realItem);
         cart.addVirtualItem(virtualItem);
@@ -46,7 +46,7 @@ public class CartTests {
     }
 
     @Test
-    public void verifyDeleteItems() {
+    public void testDeleteItems() {
         // Add items to cart
         cart.addRealItem(realItem);
         cart.addVirtualItem(virtualItem);
