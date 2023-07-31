@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import parser.JsonParser;
 import parser.NoSuchFileException;
 import shop.Cart;
@@ -8,7 +8,9 @@ import shop.RealItem;
 import shop.VirtualItem;
 
 import java.io.File;
-import java.util.stream.Stream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,6 +20,7 @@ public class JsonParserTests {
     private JsonParser jsonParser;
     private Cart cart;
     private final String FILE_PATH = "src/main/resources/TestCart.json";
+    private static final String EXPECTED_TEST_CART = "{\"cartName\":\"TestCart\",\"realItems\":[{\"weight\":2.5,\"name\":\"RealItem1\",\"price\":10.0}],\"virtualItems\":[{\"sizeOnDisk\":100.0,\"name\":\"VirtualItem1\",\"price\":20.0}],\"total\":36.0}";
 
     @BeforeEach
     public void setup() {
@@ -45,13 +48,12 @@ public class JsonParserTests {
 
     @Test
     @Tag("Json Parser")
-    public void testWriteToFile() {
-        File file = new File(FILE_PATH);
-
+    public void testWriteToFile() throws IOException {
         // Write to file
         jsonParser.writeToFile(cart);
 
-        assertTrue(file.exists(), "The file should be created");
+        String actualCart = Files.readString(Path.of(FILE_PATH));
+        assertEquals(EXPECTED_TEST_CART, actualCart, "The file should be matched with EXPECTED_TEST_CART");
     }
 
     @Test
@@ -75,19 +77,9 @@ public class JsonParserTests {
     @Disabled("Test disabled due to non relevant data")
     @ParameterizedTest
     @Tag("Json Parser")
-    @MethodSource("nonExistentFilesProvider")
+    @ValueSource(strings = {"File1.json", "File2.json", "File3.json", "File4.json", "File5.json"})
     public void testReadFromNonExistentFile(File nonExistentFile) {
         // For each file, assert that reading from it throws NoSuchFileException
         assertThrows(NoSuchFileException.class, () -> jsonParser.readFromFile(nonExistentFile));
-    }
-
-    private static Stream<File> nonExistentFilesProvider() {
-        return Stream.of(
-                new File("File1.json"),
-                new File("File2.json"),
-                new File("File3.json"),
-                new File("File4.json"),
-                new File("File5.json")
-        );
     }
 }
