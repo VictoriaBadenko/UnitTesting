@@ -1,3 +1,5 @@
+package unitTests;
+
 import org.junit.jupiter.api.Test;
 import shop.VirtualItem;
 
