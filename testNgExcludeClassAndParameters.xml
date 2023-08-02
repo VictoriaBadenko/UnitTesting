@@ -8,6 +8,8 @@
                 <exclude name=".*"/>
             </methods>
         </classes>
-        <parameter name="environment" value="test"/>
+        <parameter name="name" value="Laptop"/>
+        <parameter name="price" value="1000"/>
+        <parameter name="weight" value="2.5"/>
     </test>
 </suite>
