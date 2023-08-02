@@ -1,0 +1,13 @@
+<suite name="Excluding Classes and Parameters Suite">
+    <test name="Test with Excluding Classes and Parameters">
+        <classes>
+            <class name="RealItemTest"/>
+            <class name="VirtualItemTest"/>
+            <class name="JsonParserTests"/>
+            <methods>
+                <exclude name=".*"/>
+            </methods>
+        </classes>
+        <parameter name="environment" value="test"/>
+    </test>
+</suite>

@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Including Groups Suite">
+    <test name="Tests with Including Group">
+        <groups>
+            <run>
+                <include name="cart"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="CartTests"/>
+            <class name="RealItemTest"/>
+            <class name="VirtualItemTest"/>
+        </classes>
+    </test>
+</suite>
