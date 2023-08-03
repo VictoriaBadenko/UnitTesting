@@ -1,0 +1,15 @@
+<suite name="Excluding Groups Suite">
+    <test name="Test with Excluding Group">
+        <groups>
+            <run>
+                <exclude name="cart"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="CartTests"/>
+            <class name="JsonParserTests"/>
+            <class name="RealItemTest"/>
+            <class name="VirtualItemTest"/>
+        </classes>
+    </test>
+</suite>

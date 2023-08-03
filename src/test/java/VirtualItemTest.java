@@ -1,11 +1,10 @@
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 import shop.VirtualItem;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 public class VirtualItemTest {
-
-    @Test
+    @Test(groups = {"cart"})
     public void testToString() {
         VirtualItem virtualItem = new VirtualItem();
         virtualItem.setName("Office");
@@ -13,7 +12,7 @@ public class VirtualItemTest {
         virtualItem.setSizeOnDisk(2.5);
 
         String actual = virtualItem.toString();
-        String expected = "Class: class shop.VirtualItem; Name: Laptop; Price: 1000.0; Size on disk: 2.5";
+        String expected = "Class: class shop.VirtualItem; Name: Office; Price: 1000.0; Size on disk: 2.5";
         assertEquals(expected, actual, "Actual and expected string result should be matched.");
     }
 }
