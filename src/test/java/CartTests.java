@@ -11,7 +11,7 @@ public class CartTests {
     private RealItem realItem;
     private VirtualItem virtualItem;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setup() {
         cart = new Cart("TestCart");
         realItem = new RealItem();

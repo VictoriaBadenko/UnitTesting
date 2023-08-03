@@ -10,6 +10,10 @@
             <class name="CartTests"/>
             <class name="RealItemTest"/>
             <class name="VirtualItemTest"/>
+
+            <parameter name="name" value="Laptop"/>
+            <parameter name="price" value="1000"/>
+            <parameter name="weight" value="2.5"/>
         </classes>
     </test>
 </suite>
