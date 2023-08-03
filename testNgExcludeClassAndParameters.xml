@@ -5,7 +5,7 @@
             <class name="VirtualItemTest"/>
             <class name="JsonParserTests"/>
             <methods>
-                <exclude name=".*"/>
+                <exclude name="testWriteToFile"/>
             </methods>
         </classes>
         <parameter name="name" value="Laptop"/>
