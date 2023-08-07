@@ -29,12 +29,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.11</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.10.0</version>
+            <version>7.8.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -53,4 +48,5 @@
             <version>5.3.2</version>
         </dependency>
     </dependencies>
+
 </project>

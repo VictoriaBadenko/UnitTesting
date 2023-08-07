@@ -1,19 +1,17 @@
-package unitTests;
-
-import org.junit.jupiter.api.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import shop.Cart;
 import shop.RealItem;
 import shop.VirtualItem;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.testng.Assert.assertEquals;
 
-@DisplayName("Tests for Cart class")
 public class CartTests {
     private Cart cart;
     private RealItem realItem;
     private VirtualItem virtualItem;
 
-    @BeforeEach
+    @BeforeMethod(alwaysRun = true)
     public void setup() {
         cart = new Cart("TestCart");
         realItem = new RealItem();
@@ -27,8 +25,7 @@ public class CartTests {
         virtualItem.setSizeOnDisk(100.0);
     }
 
-    @Test
-    @Tag("Cart")
+    @Test(groups = {"cart"})
     public void testAddRealItem() {
         // Add item to cart
         cart.addRealItem(realItem);
@@ -36,11 +33,10 @@ public class CartTests {
         // Check total price
         double expectedTotalPrice = 10.0 + 10.0 * 0.2;
         double actualTotalPrice = cart.getTotalPrice();
-        assertEquals(expectedTotalPrice, actualTotalPrice, "Real Item's actual and expected total price should be matched");
+        assertEquals(actualTotalPrice, expectedTotalPrice, "Real Item's actual and expected total price should be matched");
     }
 
-    @Test
-    @Tag("Cart")
+    @Test(groups = {"cart"})
     public void testAddVirtualItem() {
         // Add item to cart
         cart.addVirtualItem(virtualItem);
@@ -48,11 +44,10 @@ public class CartTests {
         // Check total price
         double expectedTotalPrice = 20.0 + 20.0 * 0.2;
         double actualTotalPrice = cart.getTotalPrice();
-        assertEquals(expectedTotalPrice, actualTotalPrice, "Virtual Item's actual and expected total price should be matched");
+        assertEquals(actualTotalPrice, expectedTotalPrice, "Virtual Item's actual and expected total price should be matched");
     }
 
-    @Test
-    @Tag("Cart")
+    @Test(groups = {"cart"})
     public void testDeleteRealItem() {
         // Add item to cart
         cart.addRealItem(realItem);
@@ -60,14 +55,13 @@ public class CartTests {
         // Delete items from cart
         cart.deleteRealItem(realItem);
 
-        //Check total price after deleting item
+        // Check total price after deleting item
         double expectedTotalPriceAfterDelete = 0.0;
         double actualTotalPriceAfterDelete = cart.getTotalPrice();
-        assertEquals(expectedTotalPriceAfterDelete, actualTotalPriceAfterDelete, "Real Item's total price after delete should be matched with expected.");
+        assertEquals(actualTotalPriceAfterDelete, expectedTotalPriceAfterDelete, "Real Item's total price after delete should be matched with expected.");
     }
 
-    @Test
-    @Tag("Cart")
+    @Test(groups = {"cart"})
     public void testDeleteVirtualItem() {
         // Add item to cart
         cart.addVirtualItem(virtualItem);
@@ -75,9 +69,9 @@ public class CartTests {
         // Delete item from cart
         cart.deleteVirtualItem(virtualItem);
 
-        //Check total price after deleting item
+        // Check total price after deleting item
         double expectedTotalPriceAfterDelete = 0.0;
         double actualTotalPriceAfterDelete = cart.getTotalPrice();
-        assertEquals(expectedTotalPriceAfterDelete, actualTotalPriceAfterDelete, "Virtual Item's total price after delete should be matched with expected.");
+        assertEquals(actualTotalPriceAfterDelete, expectedTotalPriceAfterDelete, "Virtual Item's total price after delete should be matched with expected.");
     }
 }

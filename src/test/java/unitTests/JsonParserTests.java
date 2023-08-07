@@ -1,8 +1,5 @@
-package unitTests;
-
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.testng.annotations.*;
+import org.testng.asserts.SoftAssert;
 import parser.JsonParser;
 import parser.NoSuchFileException;
 import shop.Cart;
@@ -14,17 +11,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.testng.Assert.*;
 
-@DisplayName("Tests for JsonParser class")
 public class JsonParserTests {
-
     private JsonParser jsonParser;
     private Cart cart;
     private final String FILE_PATH = "src/main/resources/TestCart.json";
-    private static final String EXPECTED_TEST_CART = "{\"cartName\":\"TestCart\",\"realItems\":[{\"weight\":2.5,\"name\":\"RealItem1\",\"price\":10.0}],\"virtualItems\":[{\"sizeOnDisk\":100.0,\"name\":\"VirtualItem1\",\"price\":20.0}],\"total\":36.0}";
+    private static final String EXPECTED_TEST_CART = "{\"cartName\":\"TestCart\",\"realItems\":[{\"weight\":2.5,\"name\":\"RealItem1\"," +
+            "\"price\":10.0}],\"virtualItems\":[{\"sizeOnDisk\":100.0,\"name\":\"VirtualItem1\",\"price\":20.0}],\"total\":36.0}";
 
-    @BeforeEach
+    @BeforeClass
     public void setup() {
         jsonParser = new JsonParser();
         cart = new Cart("TestCart");
@@ -43,25 +39,24 @@ public class JsonParserTests {
         cart.showItems();
     }
 
-    @AfterEach
+    @AfterClass
     public void cleanup() {
         new File(FILE_PATH).delete();
     }
 
-    @Test
-    @Tag("Json Parser")
+    @Test(groups = {"jsonParser"})
     public void testWriteToFile() throws IOException {
         // Write to file
         jsonParser.writeToFile(cart);
 
         String actualCart = Files.readString(Path.of(FILE_PATH));
-        assertEquals(EXPECTED_TEST_CART, actualCart, "The file should be matched with EXPECTED_TEST_CART");
+        assertEquals(actualCart, EXPECTED_TEST_CART, "The file should be matched with EXPECTED_TEST_CART");
     }
 
-    @Test
-    @Tag("Json Parser")
+    @Test(groups = {"jsonParser"})
     public void testReadFromFile() {
         File file = new File(FILE_PATH);
+        SoftAssert softAssert = new SoftAssert();
 
         // Write to file
         jsonParser.writeToFile(cart);
@@ -69,19 +64,29 @@ public class JsonParserTests {
         // Read from file
         Cart readCart = jsonParser.readFromFile(file);
 
-        assertAll(
-                () -> assertNotNull(readCart),
-                () -> assertEquals(cart.getCartName(), readCart.getCartName()),
-                () -> assertEquals(cart.getTotalPrice(), readCart.getTotalPrice())
-        );
+        //Added grouped assertion
+        softAssert.assertNotNull(readCart);
+        softAssert.assertEquals(cart.getCartName(), readCart.getCartName());
+        softAssert.assertEquals(cart.getTotalPrice(), readCart.getTotalPrice());
+        softAssert.assertAll();
     }
 
-    @Disabled("Test disabled due to non relevant data")
-    @ParameterizedTest
-    @Tag("Json Parser")
-    @ValueSource(strings = {"File1.json", "File2.json", "File3.json", "File4.json", "File5.json"})
-    public void testReadFromNonExistentFile(File nonExistentFile) {
+    @DataProvider(name = "nonExistentFiles")
+    public Object[][] getNonExistentFiles() {
+        return new Object[][]{
+                {"File1.json"},
+                {"File2.json"},
+                {"File3.json"},
+                {"File4.json"},
+                {"File5.json"}
+        };
+    }
+
+    @Ignore("Test ignored due to non relevant data")
+    @Test(dataProvider = "nonExistentFiles", groups = {"jsonParser"})
+    public void testReadFromNonExistentFile(String nonExistentFile) {
         // For each file, assert that reading from it throws NoSuchFileException
-        assertThrows(NoSuchFileException.class, () -> jsonParser.readFromFile(nonExistentFile));
+        assertThrows(NoSuchFileException.class, () -> jsonParser.readFromFile(new File(nonExistentFile)));
     }
 }
+
