@@ -1,8 +1,9 @@
 package seleniumTest;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 import yandex.mail.pages.MainPage;
+
+import static org.testng.Assert.assertEquals;
 
 public class YandexMailTest extends BaseTest {
 
@@ -18,6 +19,6 @@ public class YandexMailTest extends BaseTest {
                 .clickLogin()
                 .getTitle();
 
-        Assertions.assertEquals(expectedTitle, actualInboxTitle, "Actual and expected title should be matched");
+        assertEquals(expectedTitle, actualInboxTitle, "Actual and expected title should be matched");
     }
 }

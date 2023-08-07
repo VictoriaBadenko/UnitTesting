@@ -1,10 +1,10 @@
 package seleniumTest;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import yandex.mail.pages.BasePage;
 
 import static java.time.Duration.ofSeconds;
@@ -12,7 +12,7 @@ import static java.time.Duration.ofSeconds;
 public class BaseTest {
     protected WebDriver driver;
 
-    @BeforeEach
+    @BeforeMethod
     public void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -22,7 +22,7 @@ public class BaseTest {
         BasePage.setDriver(driver);
     }
 
-    @AfterEach
+    @AfterMethod
     public void tearDown() {
         driver.quit();
     }
