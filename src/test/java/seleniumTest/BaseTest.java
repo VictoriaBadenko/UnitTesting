@@ -5,23 +5,21 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import yandex.mail.pages.BasePage;
 
-import java.time.Duration;
+import static java.time.Duration.ofSeconds;
 
-public abstract class BaseTestRunner {
-    private WebDriver driver;
+public class BaseTest {
+    protected WebDriver driver;
 
+    @BeforeEach
     public void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-    }
-
-    @BeforeEach
-    public void setUpBrowser() {
-        setUp();
+        driver.manage().timeouts().pageLoadTimeout(ofSeconds(30));
+        driver.manage().timeouts().implicitlyWait(ofSeconds(15));
+        BasePage.setDriver(driver);
     }
 
     @AfterEach

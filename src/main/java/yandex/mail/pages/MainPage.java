@@ -1,20 +1,18 @@
 package yandex.mail.pages;
 
-import org.openqa.selenium.WebDriver;
-
 import static yandex.mail.Locators.LOG_IN_BUTTON;
 
-public class MainPage {
-    private WebDriver driver;
+public class MainPage extends BasePage {
 
     public MainPage openWebSite() {
         driver.get("https://mail.yandex.com/");
+
         return this;
     }
 
-    public LogInPage openLoginPage() {
+    public LoginPage openLoginPage() {
         driver.findElement(LOG_IN_BUTTON).click();
 
-        return new LogInPage();
+        return new LoginPage();
     }
 }
