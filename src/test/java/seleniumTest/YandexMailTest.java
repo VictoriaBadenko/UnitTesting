@@ -19,6 +19,6 @@ public class YandexMailTest extends BaseTest {
                 .clickLogin()
                 .getTitle();
 
-        assertEquals(expectedTitle, actualInboxTitle, "Actual and expected title should be matched");
+        assertEquals(actualInboxTitle, expectedTitle,"Actual and expected title should be matched");
     }
 }
