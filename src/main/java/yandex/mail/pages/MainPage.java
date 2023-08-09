@@ -3,9 +3,10 @@ package yandex.mail.pages;
 import static yandex.mail.Locators.LOG_IN_BUTTON;
 
 public class MainPage extends BasePage {
+    public static final String YANDEX_MAIL_URL = "https://mail.yandex.com/";
 
     public MainPage openWebSite() {
-        driver.get("https://mail.yandex.com/");
+        driver.get(YANDEX_MAIL_URL);
 
         return this;
     }
