@@ -18,7 +18,7 @@ public class YandexMailTest extends BaseTest {
                 .clickLogin()
                 .inputPassword(PASSWORD)
                 .clickLoginToMail()
-                .isDisplayedMailContainer();
+                .isMailContainerDisplayed();
 
         assertTrue(isMailOpened, "Yandex Mail Inbox page should be displayed");
     }
