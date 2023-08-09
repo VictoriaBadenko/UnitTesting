@@ -17,12 +17,11 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(ofSeconds(30));
         driver.manage().timeouts().implicitlyWait(ofSeconds(15));
         BasePage.setDriver(driver);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         driver.quit();
     }

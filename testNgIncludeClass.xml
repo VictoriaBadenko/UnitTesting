@@ -1,9 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Including Classes Suite">
-    <test name="Test with Including Classes">
-        <classes>
-            <class name="CartTests"/>
-            <class name="JsonParserTests"/>
-        </classes>
-    </test>
-</suite>

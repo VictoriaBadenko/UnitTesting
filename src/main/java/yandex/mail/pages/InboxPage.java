@@ -1,21 +1,17 @@
 package yandex.mail.pages;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.NoSuchElementException;
 
+import static yandex.mail.Locators.COMPOSE_BUTTON;
 import static yandex.mail.Locators.INBOX_TITLE;
 
 public class InboxPage extends BasePage {
 
     public String getTitle() {
-        new FluentWait(driver)
-                .withTimeout(Duration.ofSeconds(15))
-                .pollingEvery(Duration.ofSeconds(3))
-                .ignoring(NoSuchElementException.class)
-                .until(ExpectedConditions.urlContains("?uid=1876203154#tabs/relevant"));
+        new WebDriverWait(driver, Duration.ofSeconds(15)).until(ExpectedConditions.visibilityOfElementLocated(COMPOSE_BUTTON));
 
         return driver.findElement(INBOX_TITLE).getText();
     }
