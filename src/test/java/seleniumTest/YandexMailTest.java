@@ -3,7 +3,7 @@ package seleniumTest;
 import org.testng.annotations.Test;
 import yandex.mail.pages.MainPage;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class YandexMailTest extends BaseTest {
     public static final String USER_NAME = "testuserte5t";
@@ -11,16 +11,15 @@ public class YandexMailTest extends BaseTest {
 
     @Test
     public void testLoginToYandexMail() {
-        var expectedTitle = "No messages in Inbox";
-        var actualInboxTitle = new MainPage()
+        var isMailOpened = new MainPage()
                 .openWebSite()
                 .openLoginPage()
                 .inputUsername(USER_NAME)
                 .clickLogin()
                 .inputPassword(PASSWORD)
                 .clickLoginToMail()
-                .getTitle();
+                .isDisplayedMailContainer();
 
-        assertEquals(actualInboxTitle, expectedTitle,"Actual and expected title should be matched");
+        assertTrue(isMailOpened, "Yandex Mail Inbox page should be displayed");
     }
 }

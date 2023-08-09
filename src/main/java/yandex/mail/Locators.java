@@ -14,4 +14,5 @@ public class Locators {
     public static final By IMAGE = By.tagName("img");
     public static final By LOG_OUT_LINK = By.linkText("Log out");
     public static final By COMPOSE_BU = By.partialLinkText("Attention!");
+    public static final By MAIL_CONTAINER = By.cssSelector(".mail-Layout-Container");
 }
