@@ -15,4 +15,5 @@ public class Locators {
     public static final By LOG_OUT_LINK = By.linkText("Log out");
     public static final By COMPOSE_BU = By.partialLinkText("Attention!");
     public static final By MAIL_CONTAINER = By.cssSelector(".mail-Layout-Container");
+    public static final By USERNAME_LABEL = By.xpath("//a[contains(@class, 'user-account_left-name')]/span[contains(@class, 'name')]");
 }

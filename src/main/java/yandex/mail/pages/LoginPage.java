@@ -1,5 +1,11 @@
 package yandex.mail.pages;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+
+import java.time.Duration;
+import java.util.NoSuchElementException;
+
 import static yandex.mail.Locators.*;
 
 public class LoginPage extends BasePage {
@@ -24,6 +30,12 @@ public class LoginPage extends BasePage {
 
     public InboxPage clickLoginToMail() {
         driver.findElement(LOG_IN_TO_MAIL).click();
+
+        new FluentWait(driver)
+                .withTimeout(Duration.ofSeconds(5))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(NoSuchElementException.class)
+                .until(ExpectedConditions.visibilityOfElementLocated(USERNAME_LABEL));
 
         return new InboxPage();
     }

@@ -1,25 +1,36 @@
 package seleniumTest;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import yandex.mail.pages.MainPage;
 
 import static org.testng.Assert.assertTrue;
 
 public class YandexMailTest extends BaseTest {
-    public static final String USER_NAME = "testuserte5t";
-    public static final String PASSWORD = "Test951X";
 
-    @Test
-    public void testLoginToYandexMail() {
+    @DataProvider(name = "credentialsProvider")
+    public Object[][] credentialsProvider() {
+        return new Object[][]{
+                {"testuserte5t", "Test951X"},
+                {"testuser2test", "Test123R"}
+        };
+    }
+
+    @Test(dataProvider = "credentialsProvider")
+    public void testLoginToYandexMail(String username, String password) throws InterruptedException {
         var isMailOpened = new MainPage()
                 .openWebSite()
                 .openLoginPage()
-                .inputUsername(USER_NAME)
+                .inputUsername(username)
                 .clickLogin()
-                .inputPassword(PASSWORD)
-                .clickLoginToMail()
-                .isMailContainerDisplayed();
+                .inputPassword(password)
+                .clickLoginToMail();
 
-        assertTrue(isMailOpened, "Yandex Mail Inbox page should be displayed");
+        // Adding a Thread.sleep (not recommended).
+        // This is a static wait, and it doesn't consider the actual state of the application.
+        Thread.sleep(5000);
+        var mailContainerDisplayed = isMailOpened.isMailContainerDisplayed();
+
+        assertTrue(mailContainerDisplayed, "Yandex Mail Inbox page should be displayed");
     }
 }

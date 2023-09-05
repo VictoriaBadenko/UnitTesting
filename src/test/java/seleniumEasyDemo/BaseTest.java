@@ -1,13 +1,12 @@
-package seleniumTest;
+package seleniumEasyDemo;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import yandex.mail.pages.BasePage;
-
-import static java.time.Duration.ofSeconds;
 
 public class BaseTest {
     protected WebDriver driver;
@@ -17,8 +16,6 @@ public class BaseTest {
         WebDriverManager.chromedriver().driverVersion("116.0.5845.96").setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(ofSeconds(15));
-        BasePage.setDriver(driver);
     }
 
     @AfterMethod(alwaysRun = true)
@@ -26,3 +23,4 @@ public class BaseTest {
         driver.quit();
     }
 }
+
