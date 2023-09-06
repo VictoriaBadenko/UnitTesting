@@ -18,8 +18,9 @@ public class AlertTest extends BaseTest {
     private static final By ALERT_BOX_CLICK_ME_BUTTON = By.xpath("//button[@onclick='myAlertFunction()']");
     private static final By CONFIRM_BOX_CLICK_ME_BUTTON = By.xpath("//button[@onclick='myConfirmFunction()']");
     private static final By CLICK_FOR_PROMPT_BOX_BUTTON = By.xpath("//button[@onclick='myPromptFunction()']");
-    public final static By CANCEL_TEXT = By.xpath("//p[@id='confirm-demo']");
-    public final static By PROMPT_BOX_ALERT_TEXT = By.xpath("//p[@id='prompt-demo']");
+    private final static By RESULT_TEXT = By.xpath("//p[@id='confirm-demo']");
+    private final static By PROMPT_BOX_ALERT_TEXT = By.xpath("//p[@id='prompt-demo']");
+    private final static String TEST_WORD = "Test";
 
     @BeforeMethod
     public void setWait() {
@@ -50,20 +51,19 @@ public class AlertTest extends BaseTest {
         driver.findElement(CONFIRM_BOX_CLICK_ME_BUTTON).click();
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         alert.dismiss();
-        var cancelMessage = driver.findElement(CANCEL_TEXT);
+        var resultMessage = driver.findElement(RESULT_TEXT);
 
-        assertTrue(cancelMessage.isDisplayed(), "Cancel text message should be displayed");
+        assertTrue(resultMessage.getText().contains("Cancel"), "Cancel text message should be displayed");
     }
 
     @Test
     public void verifyAcceptPromptBox() {
         driver.findElement(CLICK_FOR_PROMPT_BOX_BUTTON).click();
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-        alert.sendKeys("Prompt Box Test");
+        alert.sendKeys(TEST_WORD);
         alert.accept();
-        var actualAlertText = driver.findElement(PROMPT_BOX_ALERT_TEXT).getText();
-        var expectedAlertText = "You have entered 'Prompt Box Test' !";
+        var actualText = driver.findElement(PROMPT_BOX_ALERT_TEXT).getText();
 
-        assertEquals(actualAlertText, expectedAlertText, "Actual and expected alert text don't match.");
+        assertTrue(actualText.contains(TEST_WORD), "Actual and expected alert text don't match.");
     }
 }

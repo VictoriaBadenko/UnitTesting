@@ -38,10 +38,7 @@ public class TableSortAndSearchTest extends BaseTest {
                 String position = cells.get(1).getText();
                 String office = cells.get(2).getText();
                 int age = Integer.parseInt(cells.get(3).getText());
-                int salary = Integer.parseInt(cells.get(5).getAttribute("data-order")
-                        .replace("$", "")
-                        .replace(",", "")
-                        .replace("/y", ""));
+                int salary = Integer.parseInt(cells.get(5).getAttribute("data-order"));
 
                 if (age > minAge && salary <= maxSalary) {
                     filteredEmployees.add(new Employee(name, position, office));
