@@ -6,49 +6,64 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class AlertTests extends BaseTest {
-    protected Wait<WebDriver> wait;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+public class AlertTest extends BaseTest {
+    private Wait<WebDriver> wait;
     private static final String ALERT_BOX_URL = "https://demo.seleniumeasy.com/javascript-alert-box-demo.html";
     private static final By ALERT_BOX_CLICK_ME_BUTTON = By.xpath("//button[@onclick='myAlertFunction()']");
     private static final By CONFIRM_BOX_CLICK_ME_BUTTON = By.xpath("//button[@onclick='myConfirmFunction()']");
     private static final By CLICK_FOR_PROMPT_BOX_BUTTON = By.xpath("//button[@onclick='myPromptFunction()']");
+    public final static By CANCEL_TEXT = By.xpath("//p[@id='confirm-demo']");
+    public final static By PROMPT_BOX_ALERT_TEXT = By.xpath("//p[@id='prompt-demo']");
 
-    @Test
-    public void verifyAcceptAlertBox() {
+    @BeforeMethod
+    public void setWait() {
         driver.get(ALERT_BOX_URL);
-        driver.findElement(ALERT_BOX_CLICK_ME_BUTTON).click();
-        wait = new FluentWait(driver);
-        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-        alert.accept();
+        wait = new FluentWait<>(driver);
     }
 
     @Test
-    public void verifyAcceptConfirmBox() {
-        driver.get(ALERT_BOX_URL);
-        driver.findElement(CONFIRM_BOX_CLICK_ME_BUTTON).click();
-        wait = new FluentWait(driver);
+    public void verifyAlertBox() {
+        driver.findElement(ALERT_BOX_CLICK_ME_BUTTON).click();
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-        alert.accept();
+        var alertText = alert.getText();
+
+        assertEquals(alertText, "I am an alert box!", "Actual and expected alert text don't match.");
+    }
+
+    @Test
+    public void verifyConfirmBox() {
+        driver.findElement(CONFIRM_BOX_CLICK_ME_BUTTON).click();
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        var alertText = alert.getText();
+
+        assertEquals(alertText, "Press a button!", "Actual and expected alert text don't match.");
     }
 
     @Test
     public void verifyDismissConfirmBox() {
-        driver.get(ALERT_BOX_URL);
         driver.findElement(CONFIRM_BOX_CLICK_ME_BUTTON).click();
-        wait = new FluentWait(driver);
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         alert.dismiss();
+        var cancelMessage = driver.findElement(CANCEL_TEXT);
+
+        assertTrue(cancelMessage.isDisplayed(), "Cancel text message should be displayed");
     }
 
     @Test
     public void verifyAcceptPromptBox() {
-        driver.get(ALERT_BOX_URL);
         driver.findElement(CLICK_FOR_PROMPT_BOX_BUTTON).click();
-        wait = new FluentWait(driver);
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         alert.sendKeys("Prompt Box Test");
         alert.accept();
+        var actualAlertText = driver.findElement(PROMPT_BOX_ALERT_TEXT).getText();
+        var expectedAlertText = "You have entered 'Prompt Box Test' !";
+
+        assertEquals(actualAlertText, expectedAlertText, "Actual and expected alert text don't match.");
     }
 }

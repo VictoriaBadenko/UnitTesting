@@ -38,7 +38,7 @@ public class TableSortAndSearchTest extends BaseTest {
                 String position = cells.get(1).getText();
                 String office = cells.get(2).getText();
                 int age = Integer.parseInt(cells.get(3).getText());
-                double salary = Double.parseDouble(cells.get(5).getText()
+                int salary = Integer.parseInt(cells.get(5).getAttribute("data-order")
                         .replace("$", "")
                         .replace(",", "")
                         .replace("/y", ""));
@@ -60,7 +60,7 @@ public class TableSortAndSearchTest extends BaseTest {
         return filteredEmployees;
     }
 
-    private class Employee {
+    private static class Employee {
         String name;
         String position;
         String office;
