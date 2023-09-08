@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
+import yandex.mail.model.Employee;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class TableSortAndSearchTest extends BaseTest {
         driver.get(TABLE_SORT_SEARCH_URL);
         Select counts = new Select(driver.findElement(ENTRIES_DROPDOWN));
         counts.selectByVisibleText("10");
-        List<Employee> sortedEmployees = getFilteredEmployees(35, 200500);
+        getFilteredEmployees(35, 200500);
     }
 
     public List<Employee> getFilteredEmployees(int minAge, double maxSalary) {
@@ -55,17 +56,5 @@ public class TableSortAndSearchTest extends BaseTest {
         }
 
         return filteredEmployees;
-    }
-
-    private static class Employee {
-        String name;
-        String position;
-        String office;
-
-        private Employee(String name, String position, String office) {
-            this.name = name;
-            this.position = position;
-            this.office = office;
-        }
     }
 }

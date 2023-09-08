@@ -18,7 +18,7 @@ public class YandexMailTest extends BaseTest {
 
     @Test(dataProvider = "credentialsProvider")
     public void testLoginToYandexMail(String username, String password) throws InterruptedException {
-        var isMailOpened = new MainPage()
+        var inboxPage = new MainPage()
                 .openWebSite()
                 .openLoginPage()
                 .inputUsername(username)
@@ -29,8 +29,7 @@ public class YandexMailTest extends BaseTest {
         // Adding a Thread.sleep (not recommended).
         // This is a static wait, and it doesn't consider the actual state of the application.
         Thread.sleep(5000);
-        var mailContainerDisplayed = isMailOpened.isMailContainerDisplayed();
 
-        assertTrue(mailContainerDisplayed, "Yandex Mail Inbox page should be displayed");
+        assertTrue(inboxPage.isMailContainerDisplayed(), "Yandex Mail Inbox page should be displayed");
     }
 }
