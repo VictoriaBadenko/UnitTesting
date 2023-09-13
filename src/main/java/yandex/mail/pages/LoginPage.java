@@ -1,33 +1,41 @@
 package yandex.mail.pages;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
-    public static final By USERNAME_INPUT = By.cssSelector("#passp-field-login");
-    public static final By LOG_IN = By.id("passp:sign-in");
-    public static final By LOG_IN_TO_MAIL = By.xpath("//button[contains(@class, 'Button2_type_submit')]");
-    public static final By PASSWORD_INPUT = By.name("passwd");
+    @FindBy(css = "#passp-field-login")
+    WebElement usernameInput;
+
+    @FindBy(id = "passp:sign-in")
+    WebElement logInButton;
+
+    @FindBy(xpath = "//button[contains(@class, 'Button2_type_submit')]")
+    WebElement logInToMailButton;
+
+    @FindBy(name = "passwd")
+    WebElement passwordInput;
 
     public LoginPage inputUsername(String userName) {
-        driver.findElement(USERNAME_INPUT).sendKeys(userName);
+        usernameInput.sendKeys(userName);
 
         return this;
     }
 
     public LoginPage clickLogin() {
-        driver.findElement(LOG_IN).click();
+        logInButton.click();
 
         return this;
     }
 
     public LoginPage inputPassword(String password) {
-        driver.findElement(PASSWORD_INPUT).sendKeys(password);
+        passwordInput.sendKeys(password);
 
         return this;
     }
 
     public InboxPage clickLoginToMail() {
-        driver.findElement(LOG_IN_TO_MAIL).click();
+        logInToMailButton.click();
 
         return new InboxPage();
     }

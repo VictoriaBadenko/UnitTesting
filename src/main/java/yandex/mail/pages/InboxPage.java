@@ -1,19 +1,25 @@
 package yandex.mail.pages;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class InboxPage extends BasePage {
-    public static final By MAIL_CONTAINER = By.cssSelector(".mail-Layout-Container");
-    private static final By LOGOUT = By.xpath("//a[contains(@aria-label, 'Log out')]");
-    private static final By USER_NAME = By.cssSelector("a.user-account_left-name >.user-account__name");
+    @FindBy(css = ".mail-Layout-Container")
+    WebElement mailContainer;
+
+    @FindBy(xpath = "//a[contains(@aria-label, 'Log out')]")
+    WebElement logOut;
+
+    @FindBy(css = "a.user-account_left-name >.user-account__name")
+    WebElement userName;
 
     public boolean isMailContainerDisplayed() {
-        return driver.findElement(MAIL_CONTAINER).isDisplayed();
+        return mailContainer.isDisplayed();
     }
 
     public MainPage clickLogOut() {
-        driver.findElement(USER_NAME).click();
-        driver.findElement(LOGOUT).click();
+        userName.click();
+        logOut.click();
 
         return new MainPage();
     }
