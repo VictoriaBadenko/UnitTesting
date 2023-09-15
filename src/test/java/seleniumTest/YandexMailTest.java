@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class YandexMailTest extends BaseTest {
 
-    private static final String USERNAME = "testuser2test";
-    private static final String PASSWORD = "Test123R";
+    private static final String USERNAME = "testuserte5t";
+    private static final String PASSWORD = "Test951X";
 
     private InboxPage inboxPage;
 
