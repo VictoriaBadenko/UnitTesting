@@ -1,6 +1,7 @@
 package yandex.mail.pages;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import yandex.mail.driverManager.DriverManager;
 
 public class BasePage {
@@ -8,5 +9,6 @@ public class BasePage {
 
     public BasePage() {
         driver = DriverManager.getDriverInstance();
+        PageFactory.initElements(driver, this);
     }
 }
