@@ -1,35 +1,42 @@
 package seleniumTest;
 
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import yandex.mail.pages.InboxPage;
 import yandex.mail.pages.MainPage;
 
-import static org.testng.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class YandexMailTest extends BaseTest {
 
-    @DataProvider(name = "credentialsProvider")
-    public Object[][] credentialsProvider() {
-        return new Object[][]{
-                {"testuserte5t", "Test951X"},
-                {"testuser2test", "Test123R"}
-        };
-    }
+    private static final String USERNAME = "testuserte5t";
+    private static final String PASSWORD = "Test951X";
 
-    @Test(dataProvider = "credentialsProvider")
-    public void testLoginToYandexMail(String username, String password) throws InterruptedException {
-        var inboxPage = new MainPage()
+    private InboxPage inboxPage;
+
+    @BeforeEach
+    public void loginToYandex() {
+        new MainPage()
                 .openWebSite()
                 .openLoginPage()
-                .inputUsername(username)
-                .clickLogin()
-                .inputPassword(password)
-                .clickLoginToMail();
+                .loginToYandexMail(USERNAME, PASSWORD);
+        inboxPage = new InboxPage();
+    }
 
-        // Adding a Thread.sleep (not recommended).
-        // This is a static wait, and it doesn't consider the actual state of the application.
-        Thread.sleep(5000);
+    @Test
+    public void testLoginToYandexMail() {
+        var isMailOpened = inboxPage
+                .isMailContainerDisplayed();
 
-        assertTrue(inboxPage.isMailContainerDisplayed(), "Yandex Mail Inbox page should be displayed");
+        assertTrue(isMailOpened, "Yandex Mail Inbox page should be displayed");
+    }
+
+    @Test
+    public void testLogoutFromYandexMail() {
+        var isLogout = inboxPage
+                .clickLogOut()
+                .isLoginButtonDisplayed();
+
+        assertTrue(isLogout, "Yandex Main page should be displayed after logout");
     }
 }

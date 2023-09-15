@@ -1,26 +1,24 @@
 package seleniumTest;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import yandex.mail.pages.BasePage;
+import yandex.mail.driverManager.DriverManager;
 
 import static java.time.Duration.ofSeconds;
 
 public class BaseTest {
     protected WebDriver driver;
 
-    @BeforeMethod
+    @BeforeEach
     public void setUp() {
-        driver = new ChromeDriver();
+        driver = DriverManager.getDriverInstance();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(ofSeconds(15));
-        BasePage.setDriver(driver);
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterEach
     public void tearDown() {
-        driver.quit();
+        DriverManager.tearDown();
     }
 }
