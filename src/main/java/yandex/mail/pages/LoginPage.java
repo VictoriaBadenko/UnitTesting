@@ -5,16 +5,16 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
     @FindBy(css = "#passp-field-login")
-    WebElement usernameInput;
+    private WebElement usernameInput;
 
     @FindBy(id = "passp:sign-in")
-    WebElement logInButton;
+    private WebElement logInButton;
 
     @FindBy(xpath = "//button[contains(@class, 'Button2_type_submit')]")
-    WebElement logInToMailButton;
+    private WebElement logInToMailButton;
 
     @FindBy(name = "passwd")
-    WebElement passwordInput;
+    private WebElement passwordInput;
 
     public LoginPage inputUsername(String userName) {
         usernameInput.sendKeys(userName);

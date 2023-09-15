@@ -3,9 +3,7 @@ package seleniumTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import yandex.mail.driverManager.DriverManager;
-import yandex.mail.pages.BasePage;
 
 import static java.time.Duration.ofSeconds;
 
@@ -21,6 +19,6 @@ public class BaseTest {
 
     @AfterEach
     public void tearDown() {
-        driver.quit();
+        DriverManager.tearDown();
     }
 }

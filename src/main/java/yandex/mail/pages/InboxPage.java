@@ -5,13 +5,13 @@ import org.openqa.selenium.support.FindBy;
 
 public class InboxPage extends BasePage {
     @FindBy(css = ".mail-Layout-Container")
-    WebElement mailContainer;
+    private WebElement mailContainer;
 
     @FindBy(xpath = "//a[contains(@aria-label, 'Log out')]")
-    WebElement logOut;
+    private WebElement logOut;
 
     @FindBy(css = "a.user-account_left-name >.user-account__name")
-    WebElement userName;
+    private WebElement userName;
 
     public boolean isMailContainerDisplayed() {
         return mailContainer.isDisplayed();

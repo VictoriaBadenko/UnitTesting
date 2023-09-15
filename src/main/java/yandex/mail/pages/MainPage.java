@@ -7,7 +7,7 @@ public class MainPage extends BasePage {
     public static final String YANDEX_MAIL_URL = "https://mail.yandex.com/";
 
     @FindBy(id = "header-login-button")
-    WebElement logInButton;
+    private WebElement logInButton;
 
     public MainPage openWebSite() {
         driver.get(YANDEX_MAIL_URL);
