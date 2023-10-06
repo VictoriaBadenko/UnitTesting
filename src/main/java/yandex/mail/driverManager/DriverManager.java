@@ -8,8 +8,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static java.time.Duration.ofSeconds;
-
 public class DriverManager {
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private static final String SELENIUM_GRID_URL = "http://localhost:4444/wd/hub";
@@ -42,9 +40,6 @@ public class DriverManager {
             throw new RuntimeException(e);
         }
         WebDriver webDriver = new RemoteWebDriver(url, capabilities);
-        webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().implicitlyWait(ofSeconds(10));
-        webDriver.manage().timeouts().pageLoadTimeout(ofSeconds(10));
         return webDriver;
     }
 }

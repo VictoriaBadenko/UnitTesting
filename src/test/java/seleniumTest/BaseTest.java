@@ -10,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import yandex.mail.driverManager.DriverManager;
 
+import static java.time.Duration.ofSeconds;
+
 @ExtendWith(AllureTestWatcher.class)
 public class BaseTest {
     protected WebDriver driver;
@@ -19,6 +21,8 @@ public class BaseTest {
     @BeforeEach
     public void setUp() {
         driver = DriverManager.getDriverInstance();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(ofSeconds(15));
     }
 
     @AfterEach
