@@ -14,7 +14,7 @@ public class LoginTest extends BaseTest {
     @Test
     @AllureId("AP-2")
     @Description("Verify the user ability to login in account")
-    public void loginTest() {
+    public void testSuccessfulLogin() {
         var isUserLoggedIn = mainPage
                 .clickSignIn()
                 .login(EMAIL, PASSWORD)

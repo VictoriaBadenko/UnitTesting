@@ -2,28 +2,28 @@ package seleniumTests;
 
 import io.qameta.allure.AllureId;
 import io.qameta.allure.Description;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import luma.store.pages.HomePage;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import seleniumTests.util.BaseTest;
-import luma.store.pages.HomePage;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static luma.store.helpers.Constants.EMAIL;
 import static luma.store.helpers.Constants.PASSWORD;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AddressTest extends BaseTest {
-    private HomePage homePage;
+    private static HomePage homePage;
 
-    @BeforeEach
-    public void login() {
+    @BeforeAll
+    public static void login() {
         homePage = mainPage.clickSignIn().login(EMAIL, PASSWORD);
     }
 
     @Test
     @AllureId("AP-3")
     @Description("Verify the user ability to add address")
-    public void addNewAddressTest() {
+    public void testAddNewAddress() {
         var isAddressSaved = homePage
                 .clickMyAccountButton()
                 .clickAddressBookMenuTab()
@@ -32,8 +32,8 @@ public class AddressTest extends BaseTest {
         assertTrue(isAddressSaved);
     }
 
-    @AfterEach
-    public void cleanUp() {
+    @AfterAll
+    public static void cleanUp() {
         homePage
                 .clickMyAccountButton()
                 .clickAddressBookMenuTab()

@@ -49,6 +49,11 @@ public class CartPage extends BasePage {
         return actualSubtotal == expectedSubtotal;
     }
 
+    public boolean isProductQuantityValid(int initialQuantity, int addedQuantity) {
+        int finalQuantity = getProductQuantity();
+        return initialQuantity + addedQuantity == finalQuantity;
+    }
+
     @SneakyThrows
     public static String extractMoneyValue(String text) {
         return getCurrencyInstance(Locale.US).parse(text).toString();

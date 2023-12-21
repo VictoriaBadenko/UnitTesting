@@ -2,20 +2,20 @@ package seleniumTests;
 
 import io.qameta.allure.AllureId;
 import io.qameta.allure.Description;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import seleniumTests.util.BaseTest;
 import luma.store.pages.CreateNewAccountPage;
 import luma.store.pages.MyAccountPage;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import seleniumTests.util.BaseTest;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UserRegistrationTest extends BaseTest {
-    private CreateNewAccountPage createNewAccountPage;
+    private static CreateNewAccountPage createNewAccountPage;
     private MyAccountPage myAccountPage;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         createNewAccountPage = mainPage.openCreateAccountPage();
     }
 
