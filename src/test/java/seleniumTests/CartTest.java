@@ -20,8 +20,10 @@ public class CartTest extends BaseTest {
     private CartPage cartPage;
 
     @BeforeEach
-    public void accessAccount() {
-        homePage = mainPage.clickSignIn().login(EMAIL, PASSWORD);
+    public void login() {
+        homePage = mainPage
+                .clickSignIn()
+                .login(EMAIL, PASSWORD);
     }
 
     @Test
