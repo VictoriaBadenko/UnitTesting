@@ -27,13 +27,14 @@ public class StorePage extends BasePage {
         Random random = new Random();
         int productsSize = products.size();
         WebElement randomProduct = products.get(random.nextInt(productsSize - 1));
-        waiter.waitForWebElementVisibility(randomProduct);
+        wait.waitForWebElementVisibility(randomProduct);
+        scrollIntoView(randomProduct);
         randomProduct.click();
         return new ProductPage();
     }
 
     public ProductPage selectProduct(String productName) {
-        WebElement selectedProduct = products.stream().filter(p -> productName.equals(p.getText()))
+        WebElement selectedProduct = products.stream().filter(products -> productName.equals(products.getText()))
                 .findFirst().orElseThrow(RuntimeException::new);
         selectedProduct.click();
         return new ProductPage();

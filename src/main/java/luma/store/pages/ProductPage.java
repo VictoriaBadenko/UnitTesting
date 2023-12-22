@@ -16,7 +16,7 @@ public class ProductPage extends BasePage {
     private List<WebElement> colorOptions;
 
     @FindBy(className = "towishlist")
-    private WebElement toWishlistButton;
+    private WebElement addToWishlistButton;
 
     @FindBy(id = "product-addtocart-button")
     private WebElement addToCartButton;
@@ -29,7 +29,7 @@ public class ProductPage extends BasePage {
     }
 
     public WishListPage wishlistProduct() {
-        toWishlistButton.click();
+        addToWishlistButton.click();
         return new WishListPage();
     }
 

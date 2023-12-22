@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class BasePage {
     protected static WebDriver driver;
-    protected Waiter waiter = new Waiter(driver);
+    protected Waiter wait = new Waiter(driver);
 
     public BasePage() {
         this.driver = DriverManager.getDriverInstance();

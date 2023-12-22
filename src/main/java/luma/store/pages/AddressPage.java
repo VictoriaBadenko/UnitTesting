@@ -62,7 +62,7 @@ public class AddressPage extends BasePage {
     public AddressPage deleteAddress() {
         deleteAddressLink.click();
         okButton.click();
-        waiter.waitForWebElementVisibility(deleteAddressMessage);
+        wait.waitForWebElementVisibility(deleteAddressMessage);
         return this;
     }
 }

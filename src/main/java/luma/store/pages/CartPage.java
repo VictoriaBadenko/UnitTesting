@@ -64,14 +64,14 @@ public class CartPage extends BasePage {
     }
 
     public CartPage deleteProducts() {
-        waiter.waitForWebElementVisibility(deleteButton);
+        wait.waitForWebElementVisibility(deleteButton);
         driver.navigate().refresh();
         int productsSize = products.size();
         for (int i = 0; i < productsSize; i++) {
-            waiter.waitForNumberOfElementsToBe(products, productsSize - i);
+            wait.waitForNumberOfElementsToBe(products, productsSize - i);
             deleteButton.click();
         }
-        waiter.waitForWebElementVisibility(emptyCartText);
+        wait.waitForWebElementVisibility(emptyCartText);
         return new CartPage();
     }
 }
