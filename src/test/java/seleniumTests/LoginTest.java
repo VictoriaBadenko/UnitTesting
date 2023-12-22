@@ -5,9 +5,9 @@ import io.qameta.allure.Description;
 import org.junit.jupiter.api.Test;
 import seleniumTests.util.BaseTest;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static luma.store.helpers.Constants.EMAIL;
 import static luma.store.helpers.Constants.PASSWORD;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoginTest extends BaseTest {
 

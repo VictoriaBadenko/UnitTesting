@@ -1,8 +1,8 @@
 package luma.store.pages;
 
+import luma.store.dto.User;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import luma.store.dto.User;
 
 public class CreateNewAccountPage extends BasePage {
     @FindBy(id = "firstname")

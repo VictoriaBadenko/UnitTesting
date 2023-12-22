@@ -1,7 +1,6 @@
 package luma.store.driverManager;
 
 import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -19,19 +18,20 @@ public class BrowserCapabilities {
             case "firefox":
                 return getFirefoxCapabilities();
             default:
-                fail("getBrowserCapabilities: Please check your browser name");
+                fail("Browser Capabilities: Your browser name is wrong!");
         }
         return null;
     }
 
     private static MutableCapabilities getFirefoxCapabilities() {
-        return new FirefoxOptions();
+        FirefoxOptions options = new FirefoxOptions();
+        options.setCapability("os", "Windows");
+        return options;
     }
 
     private static MutableCapabilities getChromeCapabilities() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("enable-automation");
-        options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+        options.setCapability("os", "Windows");
         return options;
     }
 

@@ -3,10 +3,12 @@ package seleniumTests;
 import io.qameta.allure.AllureId;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
-import org.junit.jupiter.api.*;
-import seleniumTests.util.BaseTest;
 import luma.store.pages.HomePage;
 import luma.store.pages.WishListPage;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import seleniumTests.util.BaseTest;
 
 import static luma.store.helpers.Constants.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -30,7 +32,7 @@ public class WishListTest extends BaseTest {
         wishlistPage = homePage
                 .getNavBar()
                 .selectCategory(WOMEN_CATEGORY, TOPS_SUB_CATEGORY, JACKETS_SUB_CATEGORY)
-                .goToProductPage(WOMAN_JACKET)
+                .goToProductPage(WOMAN_JACKET_PRODUCT_NAME)
                 .wishlistProduct();
         assertTrue(wishlistPage.isProductWishlistMessageDisplayed());
     }

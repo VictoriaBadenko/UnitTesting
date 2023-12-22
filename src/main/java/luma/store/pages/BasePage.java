@@ -1,11 +1,11 @@
 package luma.store.pages;
 
+import luma.store.driverManager.DriverManager;
+import luma.store.helpers.Waiter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import luma.store.driverManager.DriverManager;
-import luma.store.helpers.Waiter;
 
 public class BasePage {
     protected static WebDriver driver;

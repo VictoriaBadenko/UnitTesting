@@ -33,7 +33,7 @@ public class CartTest extends BaseTest {
     public void testAddProductsToCart() {
         cartPage = navBar.goToCart();
         int initialQuantity = cartPage.getProductQuantity();
-        storePage = navBar.selectCategory(NEW_CATEGORY);
+        storePage = navBar.selectCategory(WHATS_NEW_CATEGORY);
         storePage.addProductsToCart(productQuantity);
         cartPage = storePage
                 .getNavBar()

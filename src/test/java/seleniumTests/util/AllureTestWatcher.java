@@ -13,7 +13,7 @@ import static seleniumTests.util.BaseTest.screenshot;
 public class AllureTestWatcher implements TestWatcher {
 
     private LocalDateTime dateTime = LocalDateTime.now();
-    private String timeFormat = DateTimeFormatter.ofPattern("dd_MM_yyyy hh:mm:ss").format(dateTime);
+    private String timeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss").format(dateTime);
 
     @Override
     public void testFailed(ExtensionContext context, Throwable cause) {

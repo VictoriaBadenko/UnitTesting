@@ -1,5 +1,7 @@
 package seleniumTests.util;
 
+import luma.store.driverManager.DriverManager;
+import luma.store.pages.MainPage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -9,8 +11,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import luma.store.driverManager.DriverManager;
-import luma.store.pages.MainPage;
 
 import static java.time.Duration.ofSeconds;
 
